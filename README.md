@@ -1,65 +1,65 @@
-# AutoFusion Personal V1.0.0（Windows x64）
+# AutoFusion Personal — Windows 本地工具统一管理平台
 
-AutoFusion Personal 是一个 Windows 桌面小工具，用一个界面集中管理已经安装或计划安装的第三方工具（鸣潮助手 OK-WW、崩坏：星穹铁道助手 StarRailAssistant、7-Zip 等），并提供本机离线安装包库、目录诊断、任务队列与运行日志。
+AutoFusion Personal 是一款面向 Windows 的本地工具管理程序，旨在为已适配的第三方软件提供统一的下载、安装、启动与管理入口。
 
-**本仓库只发布编译好的 Windows 程序与说明文档。项目闭源，不包含 App/Core 源码、构建脚本、测试代码或任何用户数据。**
+它尊重第三方项目原有的安装方式，并提供模块状态管理、离线安装包库、软件目录诊断与运行日志等功能，让常用工具的管理更加集中、直观。
 
-## 下载与安装
+软件完全免费，无需注册账号。当前支持范围以程序内已适配的模块为准，更多功能与适配项目将在后续版本中逐步完善。
 
-1. 打开本仓库的 **Releases** 页面，下载最新版本的
-   `AutoFusionPersonal_1.0.0_Windows_x64.zip` 与同名的 `.sha256.txt` 校验文件。
-2. 核对 SHA-256（Windows 11 可直接在 PowerShell 里执行）：
+**本仓库仅公开 Windows 发行包与说明文档。AutoFusion App/Core 闭源，不公开源码、构建脚本、测试代码或用户数据。**
 
-   ```powershell
-   Get-FileHash .\AutoFusionPersonal_1.0.0_Windows_x64.zip -Algorithm SHA256
-   ```
+## 核心功能
 
-   结果应与 `.sha256.txt` 中的哈希完全一致。
-3. **解压整个 ZIP**，进入 `AutoFusionPersonal` 文件夹，双击 `AutoFusionPersonal.exe`。
-   - 不要只把 EXE 拖出来单独运行，`_internal` 是运行必需的依赖目录。
-   - 不需要另外安装 Python。
-4. 首次运行可能出现 Windows SmartScreen 提醒（本程序尚未做 Authenticode 代码签名）。
-   **请勿为了运行本软件而关闭 Defender、火绒、SmartScreen 或添加白名单。**
+- **已适配模块管理**：集中查看模块状态，并提供对应适配方式支持的下载、安装、启动和管理操作。具体可用操作因模块而异。
+- **遵循原版安装方式**：使用官方安装器的项目继续通过原版安装与卸载流程；便携包项目可按受管文件清单管理。
+- **离线安装包库**：保存、校验和管理本地安装包副本；导入文件不会自动安装或运行任意程序。
+- **本机目录诊断**：只读查看部分软件的常见目录及候选位置，不清理或改动第三方文件。
+- **任务队列与运行日志**：任务队列默认模拟运行；日志帮助查看操作和错误信息。
+- **支持开发者**：捐赠完全自愿，不影响任何免费功能。
 
-程序不会写入系统目录，用户配置保存在 `%LOCALAPPDATA%\AutoFusionPersonal`，模块安装目录默认为 `D:\AutoFusion\fusion`（可在"设置"里更改）。解压包本身不含 `fusion`、`OfflinePackages` 或用户配置。
+部分下载、搜索与安装功能需要连接第三方官方来源；网络可用性和第三方软件本身由相应项目负责。
 
-## 功能
+## Windows 下载与安装
 
-- **操作台**：已收录模块概览、在线搜索 GitHub、快捷执行队列（默认模拟运行，不直接动别人的程序）。
-- **模块管理**：统一查看、安装、打开原版界面与卸载；安装/卸载交给原版安装程序或受管清单。
-- **设置**：模块目录、安装包保留策略、单模块超时、目录诊断。
-- **运行日志**：安装、下载、操作与卸载记录。
-- **支持开发者**：完全自愿的捐赠入口，不解锁任何额外功能。
+支持 Windows 10 / 11 x64。从 [v1.0.0 Release](https://github.com/kizyyyture-dev/AutoFusion-Personal/releases/tag/v1.0.0) 下载以下两个附件：
+
+- `AutoFusionPersonal_1.0.0_Windows_x64.zip`
+- `AutoFusionPersonal_1.0.0_Windows_x64.zip.sha256.txt`
+
+在 ZIP 所在目录打开 PowerShell，运行：
+
+```powershell
+(Get-FileHash .\AutoFusionPersonal_1.0.0_Windows_x64.zip -Algorithm SHA256).Hash.ToLower()
+```
+
+结果应与校验文件中的值一致。v1.0.0 发布值为：
+
+```text
+e4da07ba9c92487cf8da15409c06961b225449f6d115c29af4dd301a62b250a9
+```
+
+解压**整个** ZIP，进入 `AutoFusionPersonal` 文件夹运行 `AutoFusionPersonal.exe`。请保留 `_internal` 目录；无需另装 Python。用户配置位于 `%LOCALAPPDATA%\AutoFusionPersonal`；发行包不包含用户的 `fusion`、`OfflinePackages` 或个人配置。
+
+## 使用限制与注意事项
+
+- 当前仅管理程序内已适配的模块，不支持任意软件或任意安装包的自动安装。
+- 第三方官方安装器仍按原项目的安装、卸载步骤操作。
+- 独立版不执行旧式源码替换自动更新。升级时从本仓库 Releases 下载新包并校验，解压到新目录；不要覆盖正在运行的旧目录。
+- 在 150% 显示缩放且窗口较窄时，「设置」页部分按钮文字可能被裁切；功能不受影响。
 
 ## 安全与隐私
 
-- 无云账户、无服务器遥测、无后台收费 API；不调用任何付费服务。
-- 本版本已用本机火绒安全软件 6.0.12.3（病毒库 2026-10-29 19:42）对解压目录与最终 ZIP 本体完整扫描，结果为**未发现风险**。扫描记录随 ZIP 一起分发（`安全扫描状态.txt`、`.安全扫描记录.txt`）。
-- **Windows Defender 的扫描命令在构建机上执行失败**（"Errors were encountered when attempted to scan your device."），因此本包**没有** Defender 的扫描结论，请自行用你信任的安全软件复核。
-- 程序未做数字签名；哈希与扫描结果都不能证明发布者身份，只能证明文件未被改动。
-- 第三方工具的下载与安装来自各自作者（GitHub / SourceForge 等），AutoFusion 不保证每条线路可用，也不替代你对第三方软件的判断。
-- 独立版不执行旧的"源码替换式"自动升级；更新请通过本仓库 Releases 人工核验。
-
-## 第三方组件与许可
-
-发行包内 `licenses\` 目录附带了随包运行时的许可原文：
-
-| 组件 | 版本 | 许可 |
-| --- | --- | --- |
-| Python | 3.13.12 | PSF License 2.0 |
-| Tcl / Tk | 8.6 | Tcl/Tk License（BSD 式） |
-| OpenSSL | 3.0.18 | Apache License 2.0 |
-| zlib | 1.3.1 | zlib License |
-| libffi | 3.4.6 | MIT License |
-| PyInstaller | 6.22.3 | GPL-2.0-or-later + Bootloader 例外 |
-| MSVC / UCRT 运行时 | — | Microsoft 可再发行组件条款 |
-
-完整清单、原文文件与来源链接见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) 与包内 `licenses\README-许可说明.txt`。
-
-## 许可
-
-本程序为闭源软件，版权归作者所有。允许免费下载与使用官方原版发行包；禁止反编译、修改后再分发、单独提取内置图片或收款码、以及任何形式的商业转售。详见 [LICENSE.txt](LICENSE.txt)。
+- 无云账户或服务器遥测；不要求注册或付费。部分功能会在用户操作时访问第三方来源。
+- 已有火绒对 v1.0.0 最终 ZIP 与解压目录扫描并报告**未发现风险**；扫描记录随发行包提供。Windows Defender 扫描命令在构建机上报错，**没有 Defender 扫描结论**。
+- 程序未做 Authenticode 数字签名。请勿为运行软件而关闭杀毒软件、防火墙、SmartScreen 或添加白名单。
+- SHA-256 用于核对下载文件与发布值是否一致，不能代替可信发布者身份验证。PyInstaller 打包也不能保证程序无法逆向或重新封装；捐赠前请核对收款人。
 
 ## 反馈
 
-请通过本仓库的 Issues 反馈问题，附上 Windows 版本、程序版本与"运行日志"页里的相关记录。**不要**在 Issue 里贴出你的付款码、账号或其他隐私信息。
+请在本仓库 [Issues](https://github.com/kizyyyture-dev/AutoFusion-Personal/issues) 说明 Windows 版本、程序版本和复现步骤。分享日志前请删去账号、路径及其他隐私信息。
+
+## 第三方许可与闭源声明
+
+AutoFusion 不捆绑 OK-WW（ok-wuthering-waves）、StarRailAssistant 或 7-Zip 的程序本体；这些项目的版权、发布来源和许可归各自作者所有。具体第三方运行时及许可原文见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) 与发行包内 `licenses` 目录。
+
+AutoFusion 自身的使用条款见 [LICENSE.txt](LICENSE.txt)。该条款不改变第三方组件的许可。
